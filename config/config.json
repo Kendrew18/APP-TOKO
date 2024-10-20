@@ -1,7 +1,7 @@
 {
   "DB_USERNAME": "project",
-  "DB_PASSWORD": "D81niPuny4Pr0j1!!",
-  "DB_PORT":"3408",
+  "DB_PASSWORD": "randpwsocool",
+  "DB_PORT":"3306",
   "DB_HOST": "project-server.us.to",
-  "DB_NAME":"pos"
+  "DB_NAME":"project_toko"
 }
