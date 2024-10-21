@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"APP-TOKO/controller/template_controller"
+	"APP-TOKO/controller/user_app"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -14,13 +14,13 @@ func Init() *echo.Echo {
 	e.Use(middleware.CORSWithConfig(middleware.DefaultCORSConfig))
 
 	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Project-NDL")
+		return c.String(http.StatusOK, "Project-APP-Toko")
 	})
 
-	TMP := e.Group("/TMP")
+	TMP := e.Group("/US")
 
 	//NDL
-	TMP.GET("/template", template_controller.Template_Controller)
+	TMP.GET("/sign_up", user_app.SignUp)
 
 	return e
 }
