@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"APP-TOKO/controller/cabang"
 	"APP-TOKO/controller/user_app"
 	"net/http"
 
@@ -17,10 +18,13 @@ func Init() *echo.Echo {
 		return c.String(http.StatusOK, "Project-APP-Toko")
 	})
 
-	TMP := e.Group("/US")
+	// user
+	US := e.Group("/US")
+	US.POST("/sign_up", user_app.SignUp)
 
-	//NDL
-	TMP.GET("/sign_up", user_app.SignUp)
+	//cabang
+	CB := e.Group("/CB")
+	CB.POST("/cabang", cabang.Input_Cabang)
 
 	return e
 }
