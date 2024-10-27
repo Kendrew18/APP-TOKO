@@ -20,12 +20,15 @@ func Init() *echo.Echo {
 
 	// user
 	US := e.Group("/US")
-	US.POST("/sign_up", user_app.SignUp)
+	US.POST("/login", user_app.Login)
+	US.POST("/sign-up", user_app.SignUp)
 
 	//cabang
 	CB := e.Group("/CB")
 	CB.POST("/cabang", cabang.InputCabang)
 	CB.GET("/cabang", cabang.ReadCabang)
+
+	// Provider
 
 	return e
 }

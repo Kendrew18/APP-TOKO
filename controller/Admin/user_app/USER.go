@@ -28,3 +28,23 @@ func SignUp(c echo.Context) error {
 
 	return c.JSON(result.Status, result)
 }
+
+func Login(c echo.Context) error {
+	var Request request.Login_Request
+
+	err := c.Bind(&Request)
+
+	fmt.Println(Request)
+
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	result, err := user_app.Login(Request)
+
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	return c.JSON(result.Status, result)
+}

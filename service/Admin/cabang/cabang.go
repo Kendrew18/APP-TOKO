@@ -67,7 +67,7 @@ func Read_Cabang() (response.Response, error) {
 
 	con := db.CreateConGorm().Table("CABANG")
 
-	err := con.Select("id_cabang", "nama_cabang", "alamat").Order("co ASC").Scan(&arr_invent).Error
+	err := con.Select("id_cabang", "nama_cabang", "alamat_cabang").Order("co ASC").Scan(&arr_invent).Error
 
 	if err != nil {
 		res.Status = http.StatusNotFound

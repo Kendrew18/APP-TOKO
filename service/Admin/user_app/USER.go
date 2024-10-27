@@ -38,8 +38,6 @@ func Sign_Up(Request request.Sign_Up_Request) (response.Response, error) {
 			return res, err.Error
 		}
 
-		Request.Status = 0
-
 		err = con.Select("co", "id_user", "id_cabang", "username", "password", "token", "status").Create(&Request)
 
 		if err.Error != nil {
@@ -64,11 +62,12 @@ func Sign_Up(Request request.Sign_Up_Request) (response.Response, error) {
 }
 
 func Login(Request request.Login_Request) (response.Response, error) {
+
 	var res response.Response
 	var us response.Login_Response
 	con := db.CreateConGorm()
 
-	err := con.Table("USER").Select("kode_user").Where("username =? AND password =?", Request.Username, Request.Password).Scan(&us.Kode_user).Error
+	err := con.Table("USER").Select("id_user").Where("username =? AND password =?", Request.Username, Request.Password).Scan(&us.Kode_user).Error
 
 	if err != nil || us.Kode_user == "" {
 		res.Status = http.StatusNotFound
