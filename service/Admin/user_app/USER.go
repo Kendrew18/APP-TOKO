@@ -38,7 +38,7 @@ func Sign_Up(Request request.Sign_Up_Request) (response.Response, error) {
 			return res, err.Error
 		}
 
-		err = con.Select("co", "id_user", "id_cabang", "username", "password", "token", "status").Create(&Request)
+		err = con.Select("co", "id_user", "id_cabang", "username", "password", "token", "level").Create(&Request)
 
 		if err.Error != nil {
 			res.Status = http.StatusNotFound
