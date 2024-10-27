@@ -2,8 +2,8 @@ package cabang
 
 import (
 	"APP-TOKO/db"
-	"APP-TOKO/model/request"
-	"APP-TOKO/model/response"
+	"APP-TOKO/model/Admin/request"
+	"APP-TOKO/model/Admin/response"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -56,6 +56,35 @@ func Input_Cabang(Request request.Input_Cabang_Request) (response.Response, erro
 		res.Status = http.StatusNotAcceptable
 		res.Message = "cabang telah ada"
 		return res, err
+	}
+
+	return res, nil
+}
+
+func Read_Cabang() (response.Response, error) {
+	var res response.Response
+	var arr_invent []response.Read_Cabang_Response
+
+	con := db.CreateConGorm().Table("CABANG")
+
+	err := con.Select("id_cabang", "nama_cabang", "alamat").Order("co ASC").Scan(&arr_invent).Error
+
+	if err != nil {
+		res.Status = http.StatusNotFound
+		res.Message = "Status Not Found"
+		res.Data = arr_invent
+		return res, err
+	}
+
+	if arr_invent == nil {
+		res.Status = http.StatusNotFound
+		res.Message = "Status Not Found"
+		res.Data = arr_invent
+
+	} else {
+		res.Status = http.StatusOK
+		res.Message = "Suksess"
+		res.Data = arr_invent
 	}
 
 	return res, nil

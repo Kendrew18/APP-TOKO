@@ -1,13 +1,13 @@
 package template_service
 
-import (
-	"APP-TOKO/model/request"
-	"APP-TOKO/model/response"
-)
+// import (
+// 	"APP-TOKO/model/request"
+// 	"APP-TOKO/model/response"
+// )
 
-func Template_Service(Request request.Request) (response.Response, error) {
+// func Template_Service(Request request.Request) (response.Response, error) {
 
-	var res response.Response
+// 	var res response.Response
 
-	return res, nil
-}
+// 	return res, nil
+// }

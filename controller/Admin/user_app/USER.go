@@ -1,8 +1,8 @@
 package user_app
 
 import (
-	"APP-TOKO/model/request"
-	"APP-TOKO/service/user_app"
+	"APP-TOKO/model/Admin/request"
+	"APP-TOKO/service/Admin/user_app"
 	"fmt"
 	"net/http"
 

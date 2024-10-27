@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"APP-TOKO/controller/cabang"
-	"APP-TOKO/controller/user_app"
+	"APP-TOKO/controller/Admin/cabang"
+	"APP-TOKO/controller/Admin/user_app"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -24,7 +24,8 @@ func Init() *echo.Echo {
 
 	//cabang
 	CB := e.Group("/CB")
-	CB.POST("/cabang", cabang.Input_Cabang)
+	CB.POST("/cabang", cabang.InputCabang)
+	CB.GET("/cabang", cabang.ReadCabang)
 
 	return e
 }
