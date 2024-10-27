@@ -9,27 +9,27 @@ import (
 	"strconv"
 )
 
-func Input_Cabang(Request request.Input_Cabang_Request) (response.Response, error) {
+func Input_Tipe(Request request.Input_Tipe_Request) (response.Response, error) {
 	var res response.Response
 
 	id_cabang := ""
 
 	con := db.CreateConGorm().Table("TIPE")
 
-	err := con.Select("id_tipe").Where("nama_tipe = ?", Request.Nama_Cabang, Request.Alamat_cabang).Order("co ASC").Scan(&id_cabang).Error
+	err := con.Select("id_tipe").Where("nama_tipe = ?", Request.Nama_tipe).Order("co ASC").Scan(&id_cabang).Error
 
 	if id_cabang == "" {
 
 		fmt.Println(Request)
 
-		con := db.CreateConGorm().Table("CABANG")
+		con := db.CreateConGorm().Table("TIPE")
 
 		co := 0
 
 		err := con.Select("co").Order("co DESC").Limit(1).Scan(&co)
 
 		Request.Co = co + 1
-		Request.Id_cabang = "CB-" + strconv.Itoa(Request.Co)
+		Request.Id_tipe = "TP-" + strconv.Itoa(Request.Co)
 
 		if err.Error != nil {
 			res.Status = http.StatusNotFound
@@ -38,7 +38,7 @@ func Input_Cabang(Request request.Input_Cabang_Request) (response.Response, erro
 			return res, err.Error
 		}
 
-		err = con.Select("co", "id_cabang", "nama_cabang", "alamat_cabang").Create(&Request)
+		err = con.Select("co", "id_tipe", "nama_tipe").Create(&Request)
 
 		if err.Error != nil {
 			res.Status = http.StatusNotFound
@@ -61,13 +61,13 @@ func Input_Cabang(Request request.Input_Cabang_Request) (response.Response, erro
 	return res, nil
 }
 
-func Read_Cabang() (response.Response, error) {
+func Read_Tipe() (response.Response, error) {
 	var res response.Response
-	var arr_invent []response.Read_Cabang_Response
+	var arr_invent []response.Read_Tipe_Response
 
-	con := db.CreateConGorm().Table("CABANG")
+	con := db.CreateConGorm().Table("TIPE")
 
-	err := con.Select("id_cabang", "nama_cabang", "alamat_cabang").Order("co ASC").Scan(&arr_invent).Error
+	err := con.Select("id_tipe", "nama_tipe").Order("co ASC").Scan(&arr_invent).Error
 
 	if err != nil {
 		res.Status = http.StatusNotFound

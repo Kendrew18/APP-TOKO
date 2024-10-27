@@ -2,6 +2,8 @@ package routes
 
 import (
 	"APP-TOKO/controller/Admin/cabang"
+	"APP-TOKO/controller/Admin/provider"
+	"APP-TOKO/controller/Admin/tipe"
 	"APP-TOKO/controller/Admin/user_app"
 	"net/http"
 
@@ -28,7 +30,15 @@ func Init() *echo.Echo {
 	CB.POST("/cabang", cabang.InputCabang)
 	CB.GET("/cabang", cabang.ReadCabang)
 
-	// Provider
+	//provider
+	P := e.Group("/P")
+	P.POST("/provider", provider.InputProvider)
+	P.GET("/provider", provider.ReadProvider)
+
+	//tipe
+	TP := e.Group("/TP")
+	TP.POST("/tipe", tipe.InputTipe)
+	TP.GET("/tipe", tipe.ReadTipe)
 
 	return e
 }
