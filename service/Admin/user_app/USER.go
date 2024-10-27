@@ -67,17 +67,21 @@ func Login(Request request.Login_Request) (response.Response, error) {
 	var us response.Login_Response
 	con := db.CreateConGorm()
 
-	err := con.Table("USER").Select("id_user").Where("username =? AND password =?", Request.Username, Request.Password).Scan(&us.Kode_user).Error
+	err := con.Table("USER").Select("id_user").Where("username =? AND password =?", Request.Username, Request.Password).Scan(&us.Id_user).Error
 
-	if err != nil || us.Kode_user == "" {
+	if err != nil || us.Id_user == "" {
+
 		res.Status = http.StatusNotFound
 		res.Message = "Status Not Found"
 		res.Data = us
-	}
 
-	res.Status = http.StatusOK
-	res.Message = "Sukses"
-	res.Data = us
+	} else {
+
+		res.Status = http.StatusOK
+		res.Message = "Sukses"
+		res.Data = us
+
+	}
 
 	return res, nil
 }
