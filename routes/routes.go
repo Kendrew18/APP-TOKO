@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"APP-TOKO/controller/Admin/barang"
 	"APP-TOKO/controller/Admin/cabang"
 	"APP-TOKO/controller/Admin/provider"
 	"APP-TOKO/controller/Admin/tipe"
@@ -20,25 +21,32 @@ func Init() *echo.Echo {
 		return c.String(http.StatusOK, "Project-APP-Toko")
 	})
 
+	AD := e.Group("/AD")
+
 	// user
-	US := e.Group("/US")
+	US := AD.Group("/US")
 	US.POST("/login", user_app.Login)
 	US.POST("/sign-up", user_app.SignUp)
 
 	//cabang
-	CB := e.Group("/CB")
+	CB := AD.Group("/CB")
 	CB.POST("/cabang", cabang.InputCabang)
 	CB.GET("/cabang", cabang.ReadCabang)
 
 	//provider
-	P := e.Group("/P")
+	P := AD.Group("/P")
 	P.POST("/provider", provider.InputProvider)
 	P.GET("/provider", provider.ReadProvider)
 
 	//tipe
-	TP := e.Group("/TP")
+	TP := AD.Group("/TP")
 	TP.POST("/tipe", tipe.InputTipe)
 	TP.GET("/tipe", tipe.ReadTipe)
+
+	//Barang
+	BR := AD.Group("/BR")
+	BR.POST("/barang", barang.InputBarang)
+	BR.GET("/barang", barang.ReadBarang)
 
 	return e
 }
