@@ -1,9 +1,9 @@
-package barang
+package barcode
 
 import (
 	"APP-TOKO/model/Admin/request"
 	"APP-TOKO/model/Admin/response"
-	"APP-TOKO/service/Admin/barang"
+	"APP-TOKO/service/Admin/barcode"
 	"fmt"
 	"net/http"
 
@@ -11,7 +11,7 @@ import (
 )
 
 func InputBarang(c echo.Context) error {
-	var Request request.Input_Barang_Request
+	var Request request.Input_Barcode_Request
 
 	err := c.Bind(&Request)
 
@@ -21,7 +21,7 @@ func InputBarang(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
 	}
 
-	result, err := barang.Input_Barang(Request)
+	result, err := barcode.Input_Barang(Request)
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
@@ -31,13 +31,13 @@ func InputBarang(c echo.Context) error {
 }
 
 func ReadBarang(c echo.Context) error {
-	var Request request.Read_Barang_Request
+	var Request request.Read_Barcode_Request
 	var result response.Response
 	var err error
 
 	Request.Id_cabang = c.Request().Header.Get("id_cabang")
 
-	result, err = barang.Read_Barang(Request)
+	result, err = barcode.Read_Barang(Request)
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})

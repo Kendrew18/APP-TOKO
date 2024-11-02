@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"APP-TOKO/controller/Admin/barang"
+	"APP-TOKO/controller/Admin/barcode"
 	"APP-TOKO/controller/Admin/cabang"
 	"APP-TOKO/controller/Admin/provider"
 	"APP-TOKO/controller/Admin/tipe"
@@ -45,8 +45,8 @@ func Init() *echo.Echo {
 
 	//Barang
 	BR := AD.Group("/BR")
-	BR.POST("/barang", barang.InputBarang)
-	BR.GET("/barang", barang.ReadBarang)
+	BR.POST("/barcode", barcode.InputBarang)
+	BR.GET("/barcode", barcode.ReadBarang)
 
 	return e
 }
