@@ -29,7 +29,7 @@ func Input_Barang(Request request.Input_Barang_Request) (response.Response, erro
 		err := con.Select("co").Order("co DESC").Limit(1).Scan(&co)
 
 		Request.Co = co + 1
-		Request.Id_barang = "P-" + strconv.Itoa(Request.Co)
+		Request.Id_barang = "B-" + strconv.Itoa(Request.Co)
 
 		if err.Error != nil {
 			res.Status = http.StatusNotFound
@@ -38,7 +38,7 @@ func Input_Barang(Request request.Input_Barang_Request) (response.Response, erro
 			return res, err.Error
 		}
 
-		err = con.Select("co", "id_provider", "nama_provider").Create(&Request)
+		err = con.Select("co", "id_barang", "nama_barang").Create(&Request)
 
 		if err.Error != nil {
 			res.Status = http.StatusNotFound

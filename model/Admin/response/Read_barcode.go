@@ -9,4 +9,5 @@ type Read_Barcode_Response struct {
 	Harga         int64  `json:"harga"`
 	Barcode       string `json:"barcode"`
 	Status        string `json:"status"`
+	Exp_date      string `json:"exp_date"`
 }

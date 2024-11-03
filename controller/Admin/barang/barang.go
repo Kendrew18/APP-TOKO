@@ -1,17 +1,16 @@
-package barcode
+package barang
 
 import (
 	"APP-TOKO/model/Admin/request"
-	"APP-TOKO/model/Admin/response"
-	"APP-TOKO/service/Admin/barcode"
+	"APP-TOKO/service/Admin/barang"
 	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
 )
 
-func InputBarcode(c echo.Context) error {
-	var Request request.Input_Barcode_Request
+func InputBarang(c echo.Context) error {
+	var Request request.Input_Barang_Request
 
 	err := c.Bind(&Request)
 
@@ -21,7 +20,7 @@ func InputBarcode(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
 	}
 
-	result, err := barcode.Input_Barcode(Request)
+	result, err := barang.Input_Barang(Request)
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
@@ -30,11 +29,8 @@ func InputBarcode(c echo.Context) error {
 	return c.JSON(result.Status, result)
 }
 
-func ReadBarcode(c echo.Context) error {
-
-	var result response.Response
-	var err error
-	result, err = barcode.Read_Barcode()
+func ReadBarang(c echo.Context) error {
+	result, err := barang.Read_Barang()
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})

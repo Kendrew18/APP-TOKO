@@ -1,8 +1,10 @@
 package routes
 
 import (
+	"APP-TOKO/controller/Admin/barang"
 	"APP-TOKO/controller/Admin/barcode"
 	"APP-TOKO/controller/Admin/cabang"
+	"APP-TOKO/controller/Admin/opname"
 	"APP-TOKO/controller/Admin/provider"
 	"APP-TOKO/controller/Admin/tipe"
 	"APP-TOKO/controller/Admin/user_app"
@@ -43,10 +45,19 @@ func Init() *echo.Echo {
 	TP.POST("/tipe", tipe.InputTipe)
 	TP.GET("/tipe", tipe.ReadTipe)
 
-	//Barang
+	//barcode
 	BR := AD.Group("/BR")
-	BR.POST("/barcode", barcode.InputBarang)
-	BR.GET("/barcode", barcode.ReadBarang)
+	BR.POST("/barcode", barcode.InputBarcode)
+	BR.GET("/barcode", barcode.ReadBarcode)
+
+	//barang
+	B := AD.Group("/B")
+	B.POST("/barang", barang.InputBarang)
+	B.GET("/barang", barang.ReadBarang)
+
+	//Opname
+	OP := AD.Group("/OP")
+	OP.GET("/start-opname", opname.StartOpname)
 
 	return e
 }
