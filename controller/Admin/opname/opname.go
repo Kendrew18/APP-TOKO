@@ -4,6 +4,7 @@ import (
 	"APP-TOKO/model/Admin/request"
 	"APP-TOKO/model/Admin/response"
 	"APP-TOKO/service/Admin/opname"
+	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -15,6 +16,8 @@ func StartOpname(c echo.Context) error {
 	var err error
 
 	Request.Barcode = c.Request().Header.Get("barcode")
+
+	fmt.Println(Request.Barcode)
 
 	result, err = opname.Start_Opname(Request)
 

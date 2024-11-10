@@ -38,7 +38,7 @@ func Input_Barang(Request request.Input_Barang_Request) (response.Response, erro
 			return res, err.Error
 		}
 
-		err = con.Select("co", "id_barang", "nama_barang").Create(&Request)
+		err = con.Select("co", "id_tipe", "id_provider", "id_barang", "nama_barang").Create(&Request)
 
 		if err.Error != nil {
 			res.Status = http.StatusNotFound
@@ -61,13 +61,13 @@ func Input_Barang(Request request.Input_Barang_Request) (response.Response, erro
 	return res, nil
 }
 
-func Read_Barang() (response.Response, error) {
+func Read_Barang(Request request.Read_Barang_Request) (response.Response, error) {
 	var res response.Response
 	var arr_data []response.Read_Barang_Response
 
 	con := db.CreateConGorm().Table("BARANG")
 
-	err := con.Select("id_barang", "nama_barang").Order("co ASC").Scan(&arr_data).Error
+	err := con.Select("id_barang", "nama_barang").Where("id_provider = ? && id_tipe = ?", Request.Id_provider, Request.Id_tipe).Order("co ASC").Scan(&arr_data).Error
 
 	if err != nil {
 		res.Status = http.StatusNotFound

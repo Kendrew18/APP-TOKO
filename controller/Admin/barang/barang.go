@@ -2,6 +2,7 @@ package barang
 
 import (
 	"APP-TOKO/model/Admin/request"
+	"APP-TOKO/model/Admin/response"
 	"APP-TOKO/service/Admin/barang"
 	"fmt"
 	"net/http"
@@ -30,7 +31,14 @@ func InputBarang(c echo.Context) error {
 }
 
 func ReadBarang(c echo.Context) error {
-	result, err := barang.Read_Barang()
+	var Request request.Read_Barang_Request
+	var result response.Response
+	var err error
+
+	Request.Id_tipe = c.Request().Header.Get("id_tipe")
+	Request.Id_provider = c.Request().Header.Get("id_provider")
+
+	result, err = barang.Read_Barang(Request)
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
